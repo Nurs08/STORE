@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="header-banner">
+      <div class="wrapper">
+        <header class="header">
+          <h1>SneakMax</h1>
+          <nav>
+            <a href="">Каталог</a>
+            <a href="">О нас</a>
+            <a href="">Подбор товара</a>
+            <a href="">Наша команда</a>
+            <a href="">Доставка и оплата</a>
+            <a href="">Контакты</a>
+            <a id="cart">Корзина <img src="img/cart.svg" alt="" /></a>
+          </nav>
+          <div class="graybg"></div>
+        </header>
+        <div class="cart-list">
+          <!-- <div class="cart-item">
+            <img src="img/airForce.png" alt="Product 1" />
+            <div>
+            <p>Кроссовки NIKE AIR FORCE 1 '07 QS</p>
+            <p>11 000 р</p>
+         </div>
+          </div> -->
+        </div>
+        <div class="banner">
+          <div class="bgtext">SneakMax</div>
+          <h2>
+            Кроссовки известных брендов <br />
+            с доставкой по России и СНГ
+          </h2>
+          <p>
+            Мы продаем кроссовки брендов Nike, Adidas, Puma, Reebok, <br />
+            Converse и многие другие по низким ценам
+          </p>
+          <button class="button">Перейти к покупкам</button>
+        </div>
+      </div>
+    </div>
+    <div class="catalog">
+      <div class="wrapper">
+        <div class="flex">
+          <div class="aside-catalog">
+            <h3>Каталог</h3>
+            <div class="filter-panel">
+              <h3>Подбор по параметрам</h3>
+              <div class="filter-section">
+                <label for="price-range">Цена, руб</label>
+                <div class="slider-container">
+                  <div class="price-display">
+                    <span id="min-price-display"></span>
+                    <div class="price-line"></div>
+                    <span id="max-price-display"></span>
+                  </div>
+                  <div class="slider-container">
+                    <input
+                      type="range"
+                      id="min-price"
+                      min="0"
+                      max="100000"
+                      value="0"
+                    />
+                    <input
+                      type="range"
+                      id="max-price"
+                      min="0"
+                      max="100000"
+                      value="25768"
+                    />
+                    <div class="range-filled-track"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="filter-section">
+                <label>Пол</label>
+                <label
+                  ><input type="checkbox" id="male" value="male" />
+                  мужской</label
+                >
+                <label
+                  ><input type="checkbox" id="female" value="female" checked />
+                  женский</label
+                >
+              </div>
+
+              <div class="filter-section">
+                <label>Размер</label>
+                <div class="size-options" id="size-options">
+                  <label><input type="checkbox" value="35" /> 35</label>
+                  <label><input type="checkbox" value="36" /> 36</label>
+                  <label><input type="checkbox" value="37" /> 37</label>
+                  <label><input type="checkbox" value="38" /> 38</label>
+                  <label><input type="checkbox" value="39" /> 39</label>
+                  <label><input type="checkbox" value="40" /> 40</label>
+                  <label><input type="checkbox" value="41" /> 41</label>
+                  <label><input type="checkbox" value="42" /> 42</label>
+                  <label><input type="checkbox" value="43" /> 43</label>
+                </div>
+              </div>
+
+              <button class="apply-button" id="apply-button" >
+                Применить
+              </button>
+              <button class="reset-button" onclick="resetFilters()">
+                Сбросить
+              </button>
+            </div>
+          </div>
+          <div class="product-list" id="product-list">
+            
+            <!-- <div class="product">
+              <img src="img/airForce.png" alt="Product 1" />
+              <p>Кроссовки Nike Air Force 1 '07 QS</p>
+              <p>11 000 р</p>
+            </div> -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const minInput = document.getElementById("min-price");
+        const maxInput = document.getElementById("max-price");
+        const filledTrack = document.querySelector(".range-filled-track");
+        const minPriceLabel = document.getElementById("min-price-display");
+        const maxPriceLabel = document.getElementById("max-price-display");
+
+        const updateTrack = () => {
+          const min = parseInt(minInput.min);
+          const max = parseInt(maxInput.max);
+          const minValue = parseInt(minInput.value);
+          const maxValue = parseInt(maxInput.value);
+
+          const minPercent = ((minValue - min) / (max - min)) * 100;
+          const maxPercent = ((maxValue - min) / (max - min)) * 100;
+
+          filledTrack.style.left = `${minPercent}%`;
+          filledTrack.style.width = `${maxPercent - minPercent}%`;
+
+          // Обновление значений в метках
+          minPriceLabel.innerHTML = minValue;
+          maxPriceLabel.innerHTML = maxValue;
+        };
+
+        minInput.addEventListener("input", updateTrack);
+        maxInput.addEventListener("input", updateTrack);
+
+        updateTrack(); // Инициализация трека при загрузке страницы
+      });
+    </script>
+  </body>
+</html>
